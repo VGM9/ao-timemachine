@@ -1,0 +1,40 @@
+{
+  "name": "@vgm9/ao-timemachine",
+  "version": "1.0.0",
+  "description": "Avatar Of Time Machine — agentic SME zone for Mac Time Machine backup setup across all destination types",
+  "keywords": ["time-machine", "macos", "backup", "smb", "sparsebundle", "agent", "ao"],
+  "license": "MIT",
+  "bin": {
+    "ao-tm": "./bin/ao-tm.js"
+  },
+  "scripts": {
+    "check": "node bin/ao-tm.js check",
+    "setup": "node bin/ao-tm.js setup",
+    "status": "node bin/ao-tm.js status",
+    "diagnose": "node bin/ao-tm.js diagnose",
+
+    "mac:check-hardware":      "bash scripts/mac/check-hardware.sh",
+    "mac:create-sparsebundle": "bash scripts/mac/create-sparsebundle.sh",
+    "mac:install-launchagent": "bash scripts/mac/install-launchagent.sh",
+    "mac:status":              "bash scripts/mac/status.sh",
+
+    "windows:check-drives":    "powershell -ExecutionPolicy Bypass -File scripts/windows/check-drives.ps1",
+    "windows:create-share":    "powershell -ExecutionPolicy Bypass -File scripts/windows/create-share.ps1",
+    "windows:wsl-samba":       "bash scripts/windows/wsl-samba-setup.sh"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vgm9/ao-timemachine.git"
+  },
+  "homepage": "https://github.com/vgm9/ao-timemachine#readme",
+  "bugs": {
+    "url": "https://github.com/vgm9/ao-timemachine/issues"
+  }
+}

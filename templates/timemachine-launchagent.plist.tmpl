@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  templates/timemachine-launchagent.plist.tmpl
+  Template for the LaunchAgent plist installed by install-launchagent.sh.
+
+  Placeholders replaced at install time:
+    {{LABEL}}        — reverse-DNS label, e.g. com.machinename.timemachine-mount
+    {{SCRIPT_PATH}}  — absolute path to the generated mount script
+    {{LOG_PATH}}     — absolute path to the log file
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>{{LABEL}}</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>{{SCRIPT_PATH}}</string>
+    </array>
+
+    <!-- Run immediately at login -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>{{LOG_PATH}}</string>
+    <key>StandardErrorPath</key>
+    <string>{{LOG_PATH}}</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist>

@@ -1,0 +1,24 @@
+# Time Machine
+*.sparsebundle
+*.sparsebundle/
+
+# Generated files
+scripts/mac/generated/
+*.generated.sh
+*.generated.plist
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Editor
+.vscode/settings.json

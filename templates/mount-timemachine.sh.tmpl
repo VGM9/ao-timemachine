@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# templates/mount-timemachine.sh.tmpl
+# Template for the auto-mount script installed by install-launchagent.sh.
+# Placeholders replaced at install time:
+#   {{SHARE_HOST}}       — hostname or IP of the SMB server
+#   {{SHARE_URL}}        — full smb:// URL
+#   {{SHARE_VOLUME}}     — local mount point (/Volumes/<ShareName>)
+#   {{SPARSEBUNDLE_PATH}} — full path to .sparsebundle on share
+#   {{TM_VOLUME}}        — mounted HFS+ volume path (/Volumes/Time Machine)
+#   {{LOG_PATH}}         — log file path
+#   {{COMPUTER}}         — machine ComputerName
+#   {{UUID}}             — Hardware UUID
+
+set -uo pipefail
+
+SHARE_URL="{{SHARE_URL}}"
+SHARE_VOLUME="{{SHARE_VOLUME}}"
+SPARSEBUNDLE_PATH="{{SPARSEBUNDLE_PATH}}"
+TM_VOLUME="{{TM_VOLUME}}"
+LOG="{{LOG_PATH}}"
+
+log() { echo "$(date '+%Y-%m-%d %H:%M:%S') $*" >> "$LOG"; }
+log "--- mount-timemachine starting ({{COMPUTER}} / {{UUID}}) ---"
+
+# Wait for host to be reachable (up to 2 minutes, 5s intervals)
+REACHABLE=0
+for i in $(seq 1 24); do
+    if /sbin/ping -c1 -W1000 "{{SHARE_HOST}}" &>/dev/null; then
+        log "Host {{SHARE_HOST}} reachable after ${i}x5s"
+        REACHABLE=1
+        break
+    fi
+    sleep 5
+done
+
+if [ "$REACHABLE" -eq 0 ]; then
+    log "ERROR: {{SHARE_HOST}} not reachable after 2 minutes — aborting"
+    exit 1
+fi
+
+# Mount SMB share if not already mounted (uses Keychain credentials)
+if [ ! -d "$SHARE_VOLUME" ]; then
+    log "Mounting $SHARE_URL ..."
+    osascript -e "mount volume \"$SHARE_URL\"" >> "$LOG" 2>&1
+    sleep 5
+fi
+
+if [ ! -d "$SHARE_VOLUME" ]; then
+    log "ERROR: Share did not mount at $SHARE_VOLUME"
+    exit 1
+fi
+log "Share mounted: $SHARE_VOLUME"
+
+# Attach sparsebundle if not already attached
+if [ ! -d "$TM_VOLUME" ]; then
+    log "Attaching sparsebundle: $SPARSEBUNDLE_PATH ..."
+    hdiutil attach "$SPARSEBUNDLE_PATH" -nobrowse -quiet >> "$LOG" 2>&1
+    sleep 3
+fi
+
+if [ ! -d "$TM_VOLUME" ]; then
+    log "ERROR: Sparsebundle did not mount at $TM_VOLUME"
+    exit 1
+fi
+log "Sparsebundle mounted at $TM_VOLUME — Time Machine will run on next schedule"
