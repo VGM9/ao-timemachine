@@ -3,7 +3,7 @@
 # Must be run as Administrator.
 # Usage: powershell -ExecutionPolicy Bypass -File create-share.ps1
 #   Or non-interactively:
-#     $env:TM_DRIVE="D:"; $env:TM_FOLDER="TimeMachine"; $env:TM_USER="victor"
+#     $env:TM_DRIVE="D:"; $env:TM_FOLDER="TimeMachine"; $env:TM_USER="yourwindowsuser"
 #     powershell -ExecutionPolicy Bypass -File create-share.ps1
 
 #Requires -RunAsAdministrator

@@ -12,7 +12,7 @@ An **Avatar Of** (AO_) folder is a portable, deployable knowledge + tooling zone
 - **VS Code customization files** — `copilot-instructions.md`, `.agent.md`, `SKILL.md` so any Copilot agent (Stable or Insiders) can invoke domain expertise automatically
 - **Templates** — parameterized config/script files for generating system-specific artifacts
 
-This concept predates Claude plugins and VS Code Skills — AO_ folders are the original portable agentic knowledge package format used in the `vgm9` cluster.
+This concept predates Claude plugins and VS Code Skills — AO_ folders are a portable agentic knowledge package format for VS Code Copilot agents.
 
 ---
 
@@ -72,7 +72,7 @@ Destination types covered: USB, Windows SMB, Linux/Samba, TrueNAS, Synology, QNA
 
 ## VS Code Integration
 
-When this repo is open in VS Code (Stable or Insiders), the `.github/agents/Avatar.agent.md` agent is available in the agent picker as **Avatar of Time Machine**.
+When this repo is open in VS Code (Stable or Insiders), the `.github/agents/AO_TimeMachine.agent.md` agent is available in the agent picker as **Agent of Time Machine**.
 
 The `.github/skills/ao-timemachine/SKILL.md` can be referenced from any other VS Code workspace to pull in TM domain expertise on demand.
 

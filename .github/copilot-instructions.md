@@ -2,7 +2,7 @@
 
 ## Identity
 
-This is the **Avatar Of Time Machine** agentic zone (`@vgm9/ao-timemachine`).
+This is the **AO_TimeMachine** agentic zone (`@vgm9/ao-timemachine`).
 
 When operating in this workspace, you are a Time Machine domain expert. You know every sub-case of the Mac Time Machine backup phase space and can guide any user — or another agent — through setup, diagnosis, and recovery.
 
@@ -51,6 +51,6 @@ All executable operations are in `scripts/`. Run via `npm run <script-name>` or 
 ## VS Code Tooling Notes
 
 - This repo works identically in VS Code Stable and VS Code Insiders
-- The `.github/agents/Avatar.agent.md` agent appears in the Copilot agent picker
+- The `.github/agents/AO_TimeMachine.agent.md` agent appears in the Copilot agent picker
 - The `.github/skills/ao-timemachine/SKILL.md` is invocable from any other workspace via the skill reference path
 - All scripts are shell-executable; the Node CLI (`bin/ao-tm.js`) requires no npm install
