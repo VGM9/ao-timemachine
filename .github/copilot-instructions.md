@@ -36,15 +36,15 @@ See `knowledge/phase-space.md` for the full decision tree before taking any acti
 
 All executable operations are in `scripts/`. Run via `npm run <script-name>` or directly.
 
-| Script | Platform | Entry point |
-|--------|----------|-------------|
-| Mac hardware check | macOS | `scripts/mac/check-hardware.sh` |
-| Sparsebundle creation | macOS | `scripts/mac/create-sparsebundle.sh` |
-| LaunchAgent install | macOS | `scripts/mac/install-launchagent.sh` |
-| Backup status | macOS | `scripts/mac/status.sh` |
-| Windows drive inventory | Windows | `scripts/windows/check-drives.ps1` |
-| Windows share creation | Windows | `scripts/windows/create-share.ps1` |
-| WSL2 Samba (native TM) | Windows/WSL2 | `scripts/windows/wsl-samba-setup.sh` |
+| npm script | Platform | Entry point |
+|------------|----------|-------------|
+| `npm run inspect` | macOS | `scripts/mac/check-hardware.sh` |
+| `npm run sparsebundle:create` | macOS | `scripts/mac/create-sparsebundle.sh` |
+| `npm run automount:install` | macOS | `scripts/mac/install-launchagent.sh` |
+| `npm run backup:status` | macOS | `scripts/mac/status.sh` |
+| `npm run windows:drives` | Windows | `scripts/windows/check-drives.ps1` |
+| `npm run windows:share` | Windows | `scripts/windows/create-share.ps1` |
+| `npm run windows:samba` | Windows/WSL2 | `scripts/windows/wsl-samba-setup.sh` |
 
 ---
 

@@ -21,20 +21,20 @@ This concept predates Claude plugins and VS Code Skills — AO_ folders are the 
 ### On a Mac (setting up a Time Machine client)
 
 ```bash
-npx @vgm9/ao-timemachine setup
-# or clone and run locally:
 git clone https://github.com/vgm9/ao-timemachine.git
-cd ao-timemachine && node bin/ao-tm.js setup
+cd ao-timemachine
+npm run inspect           # see your hardware profile and TM compatibility
+npm run backup:configure  # interactive setup wizard
 ```
 
 ### On Windows (setting up a Time Machine destination)
 
 ```powershell
 # In PowerShell as Administrator:
-npm run windows:check-drives
-npm run windows:create-share
+npm run windows:drives   # inventory drives and free space
+npm run windows:share    # create and permission the SMB share
 # optional — for native TM support via WSL2 Samba:
-npm run windows:wsl-samba
+npm run windows:samba
 ```
 
 ---

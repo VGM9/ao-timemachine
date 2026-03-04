@@ -96,15 +96,17 @@ Run from repo root or via `npx @vgm9/ao-timemachine <command>`:
 
 ```bash
 # Mac client
-npm run mac:check-hardware        # Print OS version, UUID, drive size
-npm run mac:create-sparsebundle   # Interactive: size, host, share name → creates + copies image
-npm run mac:install-launchagent   # Install auto-mount LaunchAgent
-npm run mac:status                # tmutil status + last backup time
+npm run inspect                # Hardware profile: OS version, UUID, drive size
+npm run backup:configure       # Interactive wizard: full sparsebundle → LaunchAgent
+npm run sparsebundle:create    # Create + copy sparsebundle to SMB share
+npm run automount:install      # Install auto-mount LaunchAgent
+npm run backup:status          # Current backup phase, percent, last completed
+npm run backup:diagnose        # Diagnose why backups are failing
 
 # Windows destination
-npm run windows:check-drives       # List all drives with free space
-npm run windows:create-share       # Create SMB share with correct permissions
-npm run windows:wsl-samba          # (Advanced) Configure WSL2 Samba for native TM
+npm run windows:drives         # List all drives with free space
+npm run windows:share          # Create SMB share with correct permissions
+npm run windows:samba          # (Advanced) WSL2 Samba for native TM
 ```
 
 ---

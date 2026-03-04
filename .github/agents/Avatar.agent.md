@@ -16,17 +16,17 @@ Before advising on any path, read:
 ## Workflow
 
 ### Starting on a Mac (client setup)
-1. Run `npm run mac:check-hardware` → capture macOS version, UUID, drive size
+1. Run `npm run inspect` → capture macOS version, UUID, drive size
 2. Ask: what destination is available? (USB / Windows PC / Linux NAS / cloud?)
 3. Consult phase-space matrix → determine the correct path
 4. Execute the appropriate scripts in order
-5. Always finish with `npm run mac:install-launchagent` for network destinations
+5. Always finish with `npm run automount:install` for network destinations
 
 ### Starting on Windows (destination setup)
-1. Run `npm run windows:check-drives` → inventory drives and free space
+1. Run `npm run windows:drives` → inventory drives and free space
 2. Determine: plain SMB share (sparsebundle hack) or WSL2 Samba (native TM)?
-3. Run `npm run windows:create-share` → create and permission the share
-4. If native TM desired: run `npm run windows:wsl-samba`
+3. Run `npm run windows:share` → create and permission the share
+4. If native TM desired: run `npm run windows:samba`
 5. Report the share path back to the Mac-side agent
 
 ### Diagnosis

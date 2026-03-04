@@ -8,19 +8,19 @@
     "ao-tm": "./bin/ao-tm.js"
   },
   "scripts": {
-    "check": "node bin/ao-tm.js check",
-    "setup": "node bin/ao-tm.js setup",
-    "status": "node bin/ao-tm.js status",
-    "diagnose": "node bin/ao-tm.js diagnose",
+    "inspect":              "bash scripts/mac/check-hardware.sh",
 
-    "mac:check-hardware":      "bash scripts/mac/check-hardware.sh",
-    "mac:create-sparsebundle": "bash scripts/mac/create-sparsebundle.sh",
-    "mac:install-launchagent": "bash scripts/mac/install-launchagent.sh",
-    "mac:status":              "bash scripts/mac/status.sh",
+    "backup:configure":     "node bin/ao-tm.js setup",
+    "backup:status":        "bash scripts/mac/status.sh",
+    "backup:start":         "sudo tmutil startbackup && tmutil status",
+    "backup:diagnose":      "node bin/ao-tm.js diagnose",
 
-    "windows:check-drives":    "powershell -ExecutionPolicy Bypass -File scripts/windows/check-drives.ps1",
-    "windows:create-share":    "powershell -ExecutionPolicy Bypass -File scripts/windows/create-share.ps1",
-    "windows:wsl-samba":       "bash scripts/windows/wsl-samba-setup.sh"
+    "sparsebundle:create":  "bash scripts/mac/create-sparsebundle.sh",
+    "automount:install":    "bash scripts/mac/install-launchagent.sh",
+
+    "windows:drives":       "powershell -ExecutionPolicy Bypass -File scripts/windows/check-drives.ps1",
+    "windows:share":        "powershell -ExecutionPolicy Bypass -File scripts/windows/create-share.ps1",
+    "windows:samba":        "bash scripts/windows/wsl-samba-setup.sh"
   },
   "engines": {
     "node": ">=18"

@@ -225,14 +225,17 @@ COMMANDS
   diagnose  Run diagnostic checks and report what's broken
   help      Show this message
 
-NPM SCRIPTS (also available)
-  npm run mac:check-hardware        Hardware profile
-  npm run mac:create-sparsebundle   Create + copy sparsebundle to share
-  npm run mac:install-launchagent   Install auto-mount LaunchAgent
-  npm run mac:status                Full status report
-  npm run windows:check-drives      Drive inventory (Windows)
-  npm run windows:create-share      Create SMB share (Windows, Admin required)
-  npm run windows:wsl-samba         WSL2 Samba native TM setup (Windows/WSL2)
+NPM SCRIPTS (primary interface)
+  npm run inspect               Hardware profile: macOS version, UUID, drive size
+  npm run backup:configure      Interactive setup wizard
+  npm run backup:start          Start a backup now
+  npm run backup:status         Full status report
+  npm run backup:diagnose       Diagnose failures
+  npm run sparsebundle:create   Create + copy sparsebundle to SMB share
+  npm run automount:install     Install auto-mount LaunchAgent
+  npm run windows:drives        Drive inventory (Windows)
+  npm run windows:share         Create SMB share (Windows, Admin required)
+  npm run windows:samba         WSL2 Samba native TM setup (Windows/WSL2)
 
 KNOWLEDGE BASE
   knowledge/phase-space.md          Full decision tree for all sub-cases
