@@ -25,19 +25,31 @@ echo ""
 # --- Gather inputs ---
 
 if [ -z "${SHARE_VOLUME:-}" ]; then
-    # Auto-detect mounted SMB shares so the user sees their own paths, not an example
+    # Auto-detect mounted SMB shares
     MOUNTED_SMB=$(mount | awk '$5 == "smbfs" {print $3}' 2>/dev/null)
+
     if [ -n "$MOUNTED_SMB" ]; then
-        echo "Detected mounted SMB shares:"
-        echo "$MOUNTED_SMB" | nl -w2 -s') '
-        echo ""
-        echo "Enter the share path (copy from above, or type a custom path):"
+        # Score each share: prefer names containing timemachine/time_machine/time-machine/backup (case-insensitive)
+        TM_SHARE=$(echo "$MOUNTED_SMB" | grep -i 'timemachine\|time.machine\|backup' | head -1)
+
+        if [ -n "$TM_SHARE" ]; then
+            echo "Detected Time Machine share: $TM_SHARE"
+            echo "Press Enter to use it, or type a different path:"
+            read -r INPUT
+            SHARE_VOLUME="${INPUT:-$TM_SHARE}"
+        else
+            echo "Detected mounted SMB shares (none look like a Time Machine share):"
+            echo "$MOUNTED_SMB" | nl -w2 -s') '
+            echo ""
+            echo "Enter the share path (copy from above, or type a custom path):"
+            read -r SHARE_VOLUME
+        fi
     else
         echo "No SMB shares detected. Mount first:"
         echo "  Finder → Go → Connect to Server → smb://<HOST>/<SHARE>"
-        echo "Then enter the full mount path (e.g. /Volumes/YourShareName):"
+        echo "Then press Enter once mounted, or type the path now:"
+        read -r SHARE_VOLUME
     fi
-    read -r SHARE_VOLUME
 fi
 
 if [ ! -d "$SHARE_VOLUME" ]; then
