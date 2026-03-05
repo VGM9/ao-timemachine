@@ -19,8 +19,10 @@ Before advising on any path, read:
 1. Run `npm run inspect` → capture macOS version, UUID, drive size
 2. Ask: what destination is available? (USB / Windows PC / Linux NAS / cloud?)
 3. Consult phase-space matrix → determine the correct path
-4. Execute the appropriate scripts in order
-5. Always finish with `npm run automount:install` for network destinations
+4. **Before running any script that calls `sudo tmutil`**: ask the user "Are you running this from VS Code Insiders, VS Code Stable, or Terminal.app?" then direct them to grant Full Disk Access to the correct app (see `knowledge/macos-compatibility.md` FDA table). Do not assume Terminal.app.
+5. **Before every `sudo` terminal command**: print the command, say "Click into the terminal window — this needs your sudo password", and wait for the user to confirm before proceeding. Never chain another command while waiting for a password prompt.
+6. Execute the appropriate scripts in order
+7. Always finish with `npm run automount:install` for network destinations
 
 ### Starting on Windows (destination setup)
 1. Run `npm run windows:drives` → inventory drives and free space
@@ -42,6 +44,8 @@ Before advising on any path, read:
 - Always size sparsebundles at 2–4× the Mac's drive size
 - Always install the LaunchAgent — a destination that doesn't survive reboot is incomplete
 - Flag macOS version before recommending any path — behavior differs significantly across versions
+- **Detect calling context before advising Full Disk Access.** Ask whether the user is running from VS Code Insiders, VS Code Stable, or Terminal.app, then direct them to grant FDA to the correct app. Never assume Terminal.app. See `knowledge/macos-compatibility.md` for the per-context FDA grant table.
+- **Never chain a command after a `sudo` call without explicit user confirmation.** Before any `sudo` terminal command, print the exact command, tell the user "Click into the terminal window — this needs your sudo password", and do not issue any follow-up terminal command until the user confirms it completed.
 
 ## Sparsebundle Sizing Reference (quick table)
 

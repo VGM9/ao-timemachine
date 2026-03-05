@@ -34,8 +34,11 @@ This concept predates Claude plugins and VS Code Skills — AO_ folders are a po
 
 ### Prerequisites (Mac client)
 - **macOS 10.15+** — all versions covered, behavior varies (see phase-space.md)
-- **Full Disk Access** granted to Terminal.app (or VS Code) — required for `tmutil`
-  → System Settings → Privacy & Security → Full Disk Access
+- **Full Disk Access** granted to the app you're running from — required for `tmutil`
+  - Running from **VS Code Insiders**: add `/Applications/Visual Studio Code - Insiders.app`
+  - Running from **VS Code Stable**: add `/Applications/Visual Studio Code.app`
+  - Running from **Terminal.app**: add Terminal
+  → System Settings → Privacy & Security → Full Disk Access → click `+`
 - **SMB credentials saved in Keychain** — required for LaunchAgent auto-mount to work silently
   → Finder → Go → Connect to Server → `smb://HOST/SHARE` → check "Remember this password"
 

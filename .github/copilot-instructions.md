@@ -29,6 +29,8 @@ See `knowledge/phase-space.md` for the full decision tree before taking any acti
 4. **Honest about what works** — plain Windows SMB does NOT natively support Time Machine on any macOS version. Always flag the sparsebundle requirement upfront.
 5. **Prefer sparsebundle hack over WSL2 Samba** unless the user is technical or explicitly wants native TM support — WSL2 Samba is more reliable but has higher setup friction.
 6. **Always set up the LaunchAgent after destination config** — a TM destination that doesn't survive reboot is incomplete.
+7. **Detect calling context before advising Full Disk Access.** Ask the user whether they are running from VS Code Insiders, VS Code Stable, or Terminal.app — then direct them to the correct FDA grant target. Never assume Terminal.app when the primary use case is VS Code. See `knowledge/macos-compatibility.md` for the per-context FDA table.
+8. **Pause before every `sudo` command.** Never fire a terminal command containing `sudo` without first printing the exact command for review, telling the user to click into the terminal window, and waiting for explicit confirmation. The user cannot type a password while the agent is racing ahead with the next command.
 
 ---
 

@@ -84,9 +84,15 @@ Templates at `templates/` in this package.
 | 16 Tahoe | Same as Sequoia |
 
 ### Full Disk Access Note (macOS 12+)
-`tmutil setdestination` requires Full Disk Access granted to the calling application.
-Grant to: `Terminal.app` (for interactive) or the parent VS Code app (for agent-driven).
-Path: System Settings → Privacy & Security → Full Disk Access
+`tmutil setdestination` requires Full Disk Access granted to the **calling application**.
+Always ask the user which app they are running from before directing them to grant FDA:
+
+| Calling context | How to grant |
+|----------------|-------------|
+| VS Code Insiders | System Settings → Privacy & Security → Full Disk Access → + → `/Applications/Visual Studio Code - Insiders.app` |
+| VS Code Stable | Add `/Applications/Visual Studio Code.app` |
+| Terminal.app | Add Terminal |
+| launchd (root) | FDA not required — root bypasses FDA checks |
 
 ---
 

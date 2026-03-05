@@ -25,7 +25,18 @@ echo ""
 # --- Gather inputs ---
 
 if [ -z "${SHARE_VOLUME:-}" ]; then
-    echo "Enter the mounted SMB share path (e.g. /Volumes/IntelMBP_TimeMachine):"
+    # Auto-detect mounted SMB shares so the user sees their own paths, not an example
+    MOUNTED_SMB=$(mount | awk '$5 == "smbfs" {print $3}' 2>/dev/null)
+    if [ -n "$MOUNTED_SMB" ]; then
+        echo "Detected mounted SMB shares:"
+        echo "$MOUNTED_SMB" | nl -w2 -s') '
+        echo ""
+        echo "Enter the share path (copy from above, or type a custom path):"
+    else
+        echo "No SMB shares detected. Mount first:"
+        echo "  Finder → Go → Connect to Server → smb://<HOST>/<SHARE>"
+        echo "Then enter the full mount path (e.g. /Volumes/YourShareName):"
+    fi
     read -r SHARE_VOLUME
 fi
 
