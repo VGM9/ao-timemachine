@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // bin/ao-tm.js
-// Avatar Of Time Machine — CLI entry point
+// Agent Of Time Machine — CLI entry point
 // No npm dependencies required (Node built-ins only, node >= 18)
 // Usage: ao-tm <command> [options]
 //   ao-tm check       — detect system, recommend path
@@ -98,8 +98,8 @@ function cmdCheck() {
 
   } else if (isWin) {
     console.log('  Platform: Windows');
-    console.log('  Run `npm run windows:check-drives` for drive inventory.');
-    console.log('  Run `npm run windows:create-share` to create an SMB share.');
+    console.log('  Run `npm run windows:drives` for drive inventory.');
+    console.log('  Run `npm run windows:share` to create an SMB share.');
   } else {
     console.log(`  Platform: ${platform()} — see knowledge/phase-space.md for Linux/NAS setup.`);
   }
@@ -149,8 +149,8 @@ function cmdSetup() {
 
   } else if (isWin) {
     console.log('  Windows detected. For destination setup, run in PowerShell (as Admin):');
-    console.log('    npm run windows:check-drives');
-    console.log('    npm run windows:create-share');
+    console.log('    npm run windows:drives');
+    console.log('    npm run windows:share');
   } else {
     console.log('  See knowledge/phase-space.md for Linux/NAS setup paths.');
   }
@@ -205,7 +205,7 @@ function cmdDiagnose() {
   console.log('');
   if (!allOk) {
     console.log('  See knowledge/phase-space.md → Common Failure Modes for fixes.');
-    console.log('  Run: npm run mac:status  for detailed logs.');
+    console.log('  Run: npm run backup:status  for detailed logs.');
   } else {
     console.log('  All checks passed.');
   }
@@ -213,7 +213,7 @@ function cmdDiagnose() {
 
 function cmdHelp() {
   console.log(`
-Avatar Of Time Machine — @vgm9/ao-timemachine
+Agent Of Time Machine — @vgm9/ao-timemachine
 
 USAGE
   ao-tm <command>

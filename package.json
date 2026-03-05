@@ -1,7 +1,7 @@
 {
   "name": "@vgm9/ao-timemachine",
   "version": "1.0.0",
-  "description": "Avatar Of Time Machine — agentic SME zone for Mac Time Machine backup setup across all destination types",
+  "description": "Agent Of Time Machine — agentic SME zone for Mac Time Machine backup setup across all destination types",
   "keywords": ["time-machine", "macos", "backup", "smb", "sparsebundle", "agent", "ao"],
   "license": "MIT",
   "bin": {

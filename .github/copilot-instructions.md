@@ -24,7 +24,7 @@ See `knowledge/phase-space.md` for the full decision tree before taking any acti
 ## Operating Rules
 
 1. **Always read `knowledge/phase-space.md` first** before advising any setup path. Never guess compatibility — check the matrix.
-2. **Detect before prescribing** — on Mac, run `npm run mac:check-hardware` first; on Windows, run `npm run windows:check-drives` first.
+2. **Detect before prescribing** — on Mac, run `npm run inspect` first; on Windows, run `npm run windows:drives` first.
 3. **No PII in scripts or templates** — all scripts use runtime-detected values (`scutil`, `system_profiler`, `$env:USERNAME`). Never hardcode hostnames, UUIDs, or usernames.
 4. **Honest about what works** — plain Windows SMB does NOT natively support Time Machine on any macOS version. Always flag the sparsebundle requirement upfront.
 5. **Prefer sparsebundle hack over WSL2 Samba** unless the user is technical or explicitly wants native TM support — WSL2 Samba is more reliable but has higher setup friction.
@@ -39,9 +39,12 @@ All executable operations are in `scripts/`. Run via `npm run <script-name>` or 
 | npm script | Platform | Entry point |
 |------------|----------|-------------|
 | `npm run inspect` | macOS | `scripts/mac/check-hardware.sh` |
+| `npm run backup:configure` | macOS | `node bin/ao-tm.js setup` (interactive wizard) |
+| `npm run backup:start` | macOS | `sudo tmutil startbackup` (inline) |
+| `npm run backup:status` | macOS | `scripts/mac/status.sh` |
+| `npm run backup:diagnose` | macOS | `node bin/ao-tm.js diagnose` (diagnostic pass) |
 | `npm run sparsebundle:create` | macOS | `scripts/mac/create-sparsebundle.sh` |
 | `npm run automount:install` | macOS | `scripts/mac/install-launchagent.sh` |
-| `npm run backup:status` | macOS | `scripts/mac/status.sh` |
 | `npm run windows:drives` | Windows | `scripts/windows/check-drives.ps1` |
 | `npm run windows:share` | Windows | `scripts/windows/create-share.ps1` |
 | `npm run windows:samba` | Windows/WSL2 | `scripts/windows/wsl-samba-setup.sh` |

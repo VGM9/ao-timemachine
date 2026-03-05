@@ -1,9 +1,9 @@
 ---
 name: ao-timemachine
-description: "Avatar Of Time Machine — complete Mac Time Machine setup, diagnosis, and recovery across all destination types (USB, Windows SMB, Linux/NAS, Synology, TrueNAS). USE FOR: setting up TM on any Mac; configuring Windows/Linux as a TM destination; sizing sparsebundles; diagnosing backup failures; installing auto-mount LaunchAgents. Covers macOS Monterey through Tahoe. Reads a comprehensive phase-space knowledge base before acting."
+description: "Agent Of Time Machine — complete Mac Time Machine setup, diagnosis, and recovery across all destination types (USB, Windows SMB, Linux/NAS, Synology, TrueNAS). USE FOR: setting up TM on any Mac; configuring Windows/Linux as a TM destination; sizing sparsebundles; diagnosing backup failures; installing auto-mount LaunchAgents. Covers macOS Monterey through Tahoe. Reads a comprehensive phase-space knowledge base before acting."
 ---
 
-# Skill: Avatar Of Time Machine
+# Skill: Agent Of Time Machine
 
 ## What This Skill Does
 
@@ -20,7 +20,7 @@ Transforms the invoking agent into a Time Machine domain expert. Loads the full 
 
 ## The AO_ Concept
 
-This skill is part of the **Avatar Of (AO_)** pattern: a portable agentic knowledge zone containing:
+This skill is part of the **Agent Of (AO_)** pattern: a portable agentic knowledge zone containing:
 - A knowledge base (phase-space, compatibility matrix, destination types)
 - Runnable scripts for every operation
 - VS Code customization files (agent, prompts, instructions)
@@ -120,7 +120,7 @@ If TM backups are missing/failing:
 4. Check LaunchAgent log → `cat ~/Library/Logs/timemachine-mount.log`
 5. Check TM system log → `log show --predicate 'subsystem == "com.apple.TimeMachine"' --last 2h`
 6. Is sparsebundle corrupted? → `hdiutil verify <path>.sparsebundle`
-7. Is ADBEL (or destination host) reachable? → `ping <hostname>`
+7. Is <DESTINATION_HOST> reachable? → `ping <hostname>`
 8. Full Disk Access still granted? → check System Settings → Privacy
 
 ## Recovery: Corrupted Sparsebundle
@@ -130,6 +130,6 @@ hdiutil verify /Volumes/<share>/<name>.sparsebundle
 hdiutil repair /Volumes/<share>/<name>.sparsebundle
 # If unrepairable, start fresh:
 # 1. Delete old sparsebundle
-# 2. npm run mac:create-sparsebundle
-# 3. npm run mac:install-launchagent (re-point TM destination)
+# 2. npm run sparsebundle:create
+# 3. npm run automount:install (re-point TM destination)
 ```
