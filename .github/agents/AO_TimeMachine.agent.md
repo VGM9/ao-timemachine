@@ -21,8 +21,9 @@ Before advising on any path, read:
 3. Consult phase-space matrix → determine the correct path
 4. **Before running any script that calls `sudo tmutil`**: ask the user "Are you running this from VS Code Insiders, VS Code Stable, or Terminal.app?" then direct them to grant Full Disk Access to the correct app (see `knowledge/macos-compatibility.md` FDA table). Do not assume Terminal.app.
 5. **Before every `sudo` terminal command**: print the command, say "Click into the terminal window — this needs your sudo password", and wait for the user to confirm before proceeding. Never chain another command while waiting for a password prompt.
-6. Execute the appropriate scripts in order
-7. Always finish with `npm run automount:install` for network destinations
+6. **Before invoking `sparsebundle:create`**: run `mount | awk '$5=="smbfs" {print $3}'` as a tool call, read the output, and use your judgment to identify which share is the Time Machine destination (consider names, context from earlier in the conversation, and what the user described). Confirm your choice with the user, then invoke as `SHARE_VOLUME=/Volumes/<chosen> npm run sparsebundle:create`. Do not leave share selection to the interactive prompt.
+7. Execute the remaining scripts in order
+8. Always finish with `npm run automount:install` for network destinations
 
 ### Starting on Windows (destination setup)
 1. Run `npm run windows:drives` → inventory drives and free space

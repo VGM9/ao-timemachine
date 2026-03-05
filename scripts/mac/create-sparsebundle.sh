@@ -25,31 +25,24 @@ echo ""
 # --- Gather inputs ---
 
 if [ -z "${SHARE_VOLUME:-}" ]; then
-    # Auto-detect mounted SMB shares
+    # List mounted SMB shares for the agent/user to choose from.
+    # Semantic selection (which share is the TM destination) is the agent's job —
+    # pass the result back as: SHARE_VOLUME=/Volumes/... npm run sparsebundle:create
     MOUNTED_SMB=$(mount | awk '$5 == "smbfs" {print $3}' 2>/dev/null)
 
     if [ -n "$MOUNTED_SMB" ]; then
-        # Score each share: prefer names containing timemachine/time_machine/time-machine/backup (case-insensitive)
-        TM_SHARE=$(echo "$MOUNTED_SMB" | grep -i 'timemachine\|time.machine\|backup' | head -1)
-
-        if [ -n "$TM_SHARE" ]; then
-            echo "Detected Time Machine share: $TM_SHARE"
-            echo "Press Enter to use it, or type a different path:"
-            read -r INPUT
-            SHARE_VOLUME="${INPUT:-$TM_SHARE}"
-        else
-            echo "Detected mounted SMB shares (none look like a Time Machine share):"
-            echo "$MOUNTED_SMB" | nl -w2 -s') '
-            echo ""
-            echo "Enter the share path (copy from above, or type a custom path):"
-            read -r SHARE_VOLUME
-        fi
+        echo "Mounted SMB shares:"
+        echo "$MOUNTED_SMB" | nl -w2 -s') '
+        echo ""
+        echo "Enter the share path to use as the Time Machine destination:"
     else
-        echo "No SMB shares detected. Mount first:"
+        echo "No SMB shares currently mounted."
+        echo "Mount the destination share first:"
         echo "  Finder → Go → Connect to Server → smb://<HOST>/<SHARE>"
-        echo "Then press Enter once mounted, or type the path now:"
-        read -r SHARE_VOLUME
+        echo "Then re-run with: SHARE_VOLUME=/Volumes/<sharename> npm run sparsebundle:create"
+        exit 1
     fi
+    read -r SHARE_VOLUME
 fi
 
 if [ ! -d "$SHARE_VOLUME" ]; then
